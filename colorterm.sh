@@ -11,86 +11,86 @@
 # can be found by other scripts.  Since it's only sourced, it doesn't 
 # need to be flagged as executable.
 
-# Liscense
+# License
 # GNU General Public License v3.0
 
 
 # Inclusion protection
 [ -n "${_COLORTERM_LOADED:-}" ] && return 0
-declare -r _COLORTERM_LOADED=1
+_COLORTERM_LOADED=1
 
 # Normal / Default  - Revert back to the console's default display colors.
-declare -r Normal='\033[0m';
-declare -r Default='\033[0m';
+Normal='\033[0m';
+Default='\033[0m';
 
-if [ ${TERM:-} =~ 256color ]; then
+if [ ${TERM:-} = 256color ]; then
     # Use the 256 color terminal notation
     # Colors (Used for colored terminal output)
     #             color     foreground                        background
     #-----------------------------------------------------------------
     #\\033[38;5;${color}m
     # Define the basic colors 
-    declare -r  White='\033[38;5;015m'
-    declare -r  Black='\033[38;5;232m'
-    declare -r  Gray='\033[38;5;240m'
-    declare -r  Red='\033[38;5;009m'
-    declare -r  Blue='\033[38;5;012m'
-    declare -r  Green='\033[38;5;010m'
-    declare -r  Yellow='\033[38;5;011m'
-    declare -r  Magenta='\033[38;5;013m'
-    declare -r  Cyan='\033[38;5;014m'
-    declare -r  Bold='\033[1m'
+    White='\033[38;5;015m'
+    Black='\033[38;5;232m'
+    Gray='\033[38;5;240m'
+    Red='\033[38;5;009m'
+    Blue='\033[38;5;012m'
+    Green='\033[38;5;010m'
+    Yellow='\033[38;5;011m'
+    Magenta='\033[38;5;013m'
+    Cyan='\033[38;5;014m'
+    Bold='\033[1m'
 
-    declare -r  LightGray='\033[38;5;250m'
-    declare -r  LightRed='\033[38;5;001m'
-    declare -r  LightBlue='\033[38;5;004m'
-    declare -r  LightGreen='\033[38;5;002m'
-    declare -r  LightYellow='\033[38;5;003m'
-    declare -r  LightMagenta='\033[38;5;005m'
-    declare -r  LightCyan='\033[38;5;0006m'
-    
-    declare -r  White_bg='\033[48;5;015m'
-    declare -r  Black_bg='\033[48;5;000m'
-    declare -r  Gray_bg='\033[48;5;008m'
-    declare -r  Red_bg='\033[48;5;001m'
-    declare -r  Blue_bg='\033[48;5;004m'
-    declare -r  Green_bg='\033[48;5;002m'
-    declare -r  Yellow_bg='\033[48;5;003m'
-    declare -r  Magenta_bg='\033[48;5;005m'
-    declare -r  Cyan_bg='\033[48;5;006m'
+    LightGray='\033[38;5;250m'
+    LightRed='\033[38;5;001m'
+    LightBlue='\033[38;5;004m'
+    LightGreen='\033[38;5;002m'
+    LightYellow='\033[38;5;003m'
+    LightMagenta='\033[38;5;005m'
+    LightCyan='\033[38;5;0006m'
 
-    declare -r  LightGray_bg='\033[48;5;007m'
-    declare -r  LightRed_bg='\033[48;5;009m'
-    declare -r  LightBlue_bg='\033[48;5;012m'
-    declare -r  LightGreen_bg='\033[48;5;010m'
-    declare -r  LightYellow_bg='\033[48;5;011m'
-    declare -r  LightMagenta_bg='\033[48;5;013m'
-    declare -r  LightCyan_bg='\033[48;5;014m'
+    White_bg='\033[48;5;015m'
+    Black_bg='\033[48;5;000m'
+    Gray_bg='\033[48;5;008m'
+    Red_bg='\033[48;5;001m'
+    Blue_bg='\033[48;5;004m'
+    Green_bg='\033[48;5;002m'
+    Yellow_bg='\033[48;5;003m'
+    Magenta_bg='\033[48;5;005m'
+    Cyan_bg='\033[48;5;006m'
 
-    declare -r  Italic='\033[3m'   # Italic text
+    LightGray_bg='\033[48;5;007m'
+    LightRed_bg='\033[48;5;009m'
+    LightBlue_bg='\033[48;5;012m'
+    LightGreen_bg='\033[48;5;010m'
+    LightYellow_bg='\033[48;5;011m'
+    LightMagenta_bg='\033[48;5;013m'
+    LightCyan_bg='\033[48;5;014m'
+
+    Italic='\033[3m'   # Italic text
 else
     # generic ANSI 16 color terminal
     # Colors (Used for colored terminal output)
     #             color     foreground                        background
     #-----------------------------------------------------------------
-    declare -r  Black='\033[1;30m';        declare -r  Black_bg='\033[40m'
-    declare -r  Red='\033[1;31m';          declare -r  Red_bg='\033[41m'
-    declare -r  Green='\033[1;32m';        declare -r  Green_bg='\033[42m'
-    declare -r  Yellow='\033[1;33m';       declare -r  Yellow_bg='\033[43m'
-    declare -r  Blue='\033[1;34m';         declare -r  Blue_bg='\033[44m'
-    declare -r  Magenta='\033[1;35m';      declare -r  Magenta_bg='\033[45m'
-    declare -r  Cyan='\033[1;36m';         declare -r  Cyan_bg='\033[46m'
-    declare -r  LightGray='\033[1;37m';    declare -r  LightGray_bg='\033[47m'
-    declare -r  Gray='\033[1;90m';         declare -r  Gray_bg='\033[100m'
-    declare -r  LightRed='\033[1;91m';     declare -r  LightRed_bg='\033[101m'
-    declare -r  LightGreen='\033[1;92m';   declare -r  LightGreen_bg='\033[102m'
-    declare -r  LightYellow='\033[1;93m';  declare -r  LightYellow_bg='\033[103m'
-    declare -r  LightBlue='\033[1;94m';    declare -r  LightBlue_bg='\033[104m'
-    declare -r  LightMagenta='\033[1;95m';  declare -r  LightMagenta_bg='\033[105m'
-    declare -r  LightCyan='\033[1;96m';    declare -r  LightCyan_bg='\033[106m'
-    declare -r  White='\033[1;97m';         declare -r  White_bg='\033[107m'
+    Black='\033[1;30m';         Black_bg='\033[40m'
+    Red='\033[1;31m';           Red_bg='\033[41m'
+    Green='\033[1;32m';         Green_bg='\033[42m'
+    Yellow='\033[1;33m';        Yellow_bg='\033[43m'
+    Blue='\033[1;34m';          Blue_bg='\033[44m'
+    Magenta='\033[1;35m';       Magenta_bg='\033[45m'
+    Cyan='\033[1;36m';          Cyan_bg='\033[46m'
+    LightGray='\033[1;37m';     LightGray_bg='\033[47m'
+    Gray='\033[1;90m';          Gray_bg='\033[100m'
+    LightRed='\033[1;91m';      LightRed_bg='\033[101m'
+    LightGreen='\033[1;92m';    LightGreen_bg='\033[102m'
+    LightYellow='\033[1;93m';   LightYellow_bg='\033[103m'
+    LightBlue='\033[1;94m';     LightBlue_bg='\033[104m'
+    LightMagenta='\033[1;95m';   LightMagenta_bg='\033[105m'
+    LightCyan='\033[1;96m';     LightCyan_bg='\033[106m'
+    White='\033[1;97m';          White_bg='\033[107m'
 
-    declare -r  Italic='\033[1;0m'
+    Italic='\033[1;0m'
 fi
 
 # Show a sample of all available terminal colors in a 16 color terminal:
@@ -134,7 +134,8 @@ show_terminal_colors() {
 show_256_colors() {
     local fgbg
     local color
-    if [ ${TERM:-} =~ 256color ]; then
+    printf "TERM: ${TERM:-}\n"
+    if [ "${TERM:-}" = "xterm-256color" ]; then
         for fgbg in 38 48 ; do # Foreground / Background
             for color in {0..255} ; do # Colors
                 # Display the color
